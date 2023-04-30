@@ -1,0 +1,74 @@
+.App {
+  font-family: sans-serif;
+}
+nav {
+  height: 100%;
+  position: fixed;
+  width: 150px;
+  background-color: #ffffff;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+a {
+  text-decoration: none;
+  margin: 50px;
+  display: block;
+  color: #000;
+  font-size: 17px;
+}
+.mail-section {
+  width: 80%;
+  margin-left: 160px;
+}
+h1 {
+  text-align: center;
+}
+
+ul {
+  padding-inline-start: 0px;
+
+  list-style: none;
+}
+li:first-of-type {
+  background-color: #fff;
+}
+li {
+  /* border: 1px solid #999; */
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+button {
+  margin-left: 8px;
+  padding: 3px 5px;
+  border: none;
+  background-color: #fff;
+  font-size: 14px;
+}
+.btn-section {
+  text-align: end;
+}
+.delete {
+  color: red;
+}
+.unread {
+  color: yellowgreen;
+}
+.spam {
+  color: green;
+}
+.star {
+  color: gold;
+  position: relative;
+  float: right;
+}
+.subject {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  text-align: start;
+  display: inline-block;
+}
