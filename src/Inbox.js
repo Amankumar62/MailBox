@@ -61,7 +61,7 @@ export const Inbox = () => {
         {displayData.map((mail) => {
           const { mId, subject, content, unread, isStarred } = mail;
           return (
-            <li key={mId}>
+            <li key={mId} style={{ backgroundColor: unread ? "#fff" : "#eee" }}>
               <p className="subject">Subject:{subject}</p>
               <button
                 className="star"
@@ -73,7 +73,13 @@ export const Inbox = () => {
               <p>{content}</p>
               <section className="btn-section">
                 <Link to={`/mailcard/${mId}`} style={{ display: "inline" }}>
-                  View Detail
+                  <button
+                    onClick={() => {
+                      if (unread) markUnreadHandler(mId);
+                    }}
+                  >
+                    View Detail
+                  </button>
                 </Link>
                 <button className="delete" onClick={() => trashHandler(mail)}>
                   Delete
