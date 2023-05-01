@@ -3,9 +3,9 @@ import { useContext } from "react";
 import { MailContext } from "./context/MailContext";
 export const MailCard = () => {
   const { mailId } = useParams();
-  const { getMailHandler, markUnreadHandler } = useContext(MailContext);
+  const { getMailHandler } = useContext(MailContext);
 
-  const { mId, subject, content, unread } = getMailHandler(mailId);
+  const { subject, content } = getMailHandler(mailId);
 
   return (
     <>

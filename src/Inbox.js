@@ -1,5 +1,13 @@
 import { useContext, useReducer } from "react";
+import {
+  AiFillBell,
+  AiFillStar,
+  AiFillDelete,
+  AiFillRead
+} from "react-icons/ai";
+import { RiSpam2Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+
 import { MailContext } from "./context/MailContext";
 
 const filterReducer = (prevState, { type, payload }) => {
@@ -39,59 +47,68 @@ export const Inbox = () => {
 
   return (
     <>
-      <h3>Filters</h3>
-      <label>
-        <input
-          type="checkbox"
-          value="unread"
-          onChange={(e) => checkboxHandler(e)}
-        />
-        Show unread mails
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          value="isStarred"
-          onChange={(e) => checkboxHandler(e)}
-        />
-        Show starred mails
-      </label>
-      <h3>Unread:{countUnreadMail()}</h3>
+      <fieldset>
+        <legend>Filters</legend>
+        <label>
+          <input
+            type="checkbox"
+            value="unread"
+            onChange={(e) => checkboxHandler(e)}
+          />
+          Show unread mails
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="isStarred"
+            onChange={(e) => checkboxHandler(e)}
+          />
+          Show starred mails
+        </label>
+      </fieldset>
+      <h3>
+        <AiFillBell />
+        You have {countUnreadMail()} Unread Mails
+      </h3>
       <ul className="mail-list" style={{ listStyle: "none" }}>
         {displayData.map((mail) => {
           const { mId, subject, content, unread, isStarred } = mail;
           return (
             <li key={mId} style={{ backgroundColor: unread ? "#fff" : "#eee" }}>
-              <p className="subject">Subject:{subject}</p>
-              <button
-                className="star"
-                style={{ color: isStarred && "#000" }}
-                onClick={() => markStarHandler(mId)}
-              >
-                {isStarred ? "Unstar" : "Star"}
-              </button>
-              <p>{content}</p>
+              <section className="mail-header">
+                <p className="subject">{subject}</p>
+                <button
+                  className="star"
+                  style={{ color: !isStarred && "#000" }}
+                  onClick={() => markStarHandler(mId)}
+                >
+                  <AiFillStar style={{ fontSize: "20px" }} />
+                </button>
+              </section>
+              <p className="content">{content}</p>
               <section className="btn-section">
-                <Link to={`/mailcard/${mId}`} style={{ display: "inline" }}>
-                  <button
-                    onClick={() => {
-                      if (unread) markUnreadHandler(mId);
-                    }}
-                  >
+                <button
+                  className="view-detail"
+                  onClick={() => {
+                    if (unread) markUnreadHandler(mId);
+                  }}
+                >
+                  <Link to={`/mailcard/${mId}`} style={{ display: "inline" }}>
                     View Detail
-                  </button>
-                </Link>
+                  </Link>
+                </button>
                 <button className="delete" onClick={() => trashHandler(mail)}>
-                  Delete
+                  <AiFillDelete /> Delete
                 </button>
                 <button
                   className="unread"
                   onClick={() => markUnreadHandler(mId)}
                 >
+                  <AiFillRead />
                   Mark as {unread ? "Read" : "Unread"}
                 </button>
                 <button className="spam" onClick={() => spamHandler(mail)}>
-                  Report Spam
+                  <RiSpam2Fill /> Report Spam
                 </button>
               </section>
             </li>
